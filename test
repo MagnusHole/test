@@ -1,0 +1,89 @@
+"""
+test
+
+Av Magnus Hole
+08.03.2021
+"""
+
+# %% Import av pakker:
+    
+import matplotlib.pyplot as plt
+import numpy as np
+
+# %% Kode:
+
+def avstand(xend,xstart,yend,ystart):  
+    a = np.sqrt((xend-xstart)**2 + (yend-ystart)**2)  
+    return a
+
+xstart = 0.0
+ystart = 0.0
+
+xend = float(input('x-koord for destinasjon 1: '))
+yend = float(input('y-koord for destinasjon 1: '))
+
+x1 = xend
+y1 = yend
+
+avstand1 = avstand(xend,xstart,yend,ystart)
+
+xstart = xend
+ystart = yend
+
+xend = float(input('x-koord for destinasjon 2: '))
+yend = float(input('y-koord for destinasjon 2: '))
+
+x2 = xend
+y2 = yend
+
+avstand2 = avstand(xend,xstart,yend,ystart)
+
+xstart = xend
+ystart = yend
+
+xend = float(input('x-koord for destinasjon 3: '))
+yend = float(input('y-koord for destinasjon 3: '))
+
+x3 = xend
+y3 = yend
+
+avstand3 = avstand(xend,xstart,yend,ystart)
+
+xstart = xend
+ystart = yend
+
+xend = float(input('x-koord for destinasjon 4: '))
+yend = float(input('y-koord for destinasjon 4: '))
+
+x4 = xend
+y4 = yend
+
+avstand4 = avstand(xend,xstart,yend,ystart)
+
+tot_avst = avstand1 + avstand2 + avstand3 + avstand4
+
+print('Total avstand (reiselengde) er', tot_avst)
+
+xstart = 0.0
+ystart = 0.0
+
+avst_luftlinje = avstand(xend,xstart,yend,ystart)
+print('Avstand maalt i luftlinje fra start til sluttpunkt er',
+      avst_luftlinje)
+
+# %% Plotting:
+
+plt.close('all')
+plt.figure(1, figsize=(12, 9))
+plt.plot([xstart, xend], [ystart, yend],'b*-')
+plt.plot([xstart, x1], [ystart, y1],'ro-')
+plt.plot([x1, x2], [y1, y2],'ro-')
+plt.plot([x2, x3], [y2, y3],'ro-')
+plt.plot([x3, x4], [y3, y4],'ro-')
+plt.xlabel('x - akse')
+plt.ylabel('y - akse')
+plt.grid()
+plt.title("Avstandspunktene og avstand i luftlinje fra start til slutt")
+plt.legend(("Avstand i luftlinje fra start til slutt i blått",
+            "Avstandspunktene i rødt" ))
+plt.show()
