@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import datetime
 
+
 # %% Svar på del a:
 
 file = "support_uke_24.xlsx"
@@ -15,18 +16,19 @@ kl_slett = data["Klokkeslett"].values
 varighet = data["Varighet"].values
 score = data["Tilfredshet"].values
 
+
 # %% Svar på del b:
     
-ant_man = np.count_nonzero(u_dag == "Mandag") # antall henvendelser for mandag telles
+ant_man = np.count_nonzero(u_dag == "Mandag") # telling av antall henvendelser for mandag 
 ant_tir = np.count_nonzero(u_dag == "Tirsdag") 
 ant_ons = np.count_nonzero(u_dag == "Onsdag")
 ant_tor = np.count_nonzero(u_dag == "Torsdag")
 ant_fre = np.count_nonzero(u_dag == "Fredag")
-print("(del b) Antall henvendelser Mandag:",ant_man)
-print("(del b) Antall henvendelser Tirsdag:",ant_tir)
-print("(del b) Antall henvendelser Onsdag:",ant_ons)
-print("(del b) Antall henvendelser Torsdag:",ant_tor)
-print("(del b) Antall henvendelser Fredag:",ant_fre)
+#print(" del b)    Antall henvendelser mandag: ",ant_man)
+#print(" del b)    Antall henvendelser tirsdag:",ant_tir)
+#print(" del b)    Antall henvendelser onsdag: ",ant_ons)
+#print(" del b)    Antall henvendelser torsdag:",ant_tor)
+#print(" del b)    Antall henvendelser fredag: ",ant_fre)
 
 plt.close("all")     # histogram lages
 plt.hist(u_dag, bins = 5)      
@@ -34,14 +36,16 @@ plt.xlabel("Svar paa oppgave del b)")
 plt.figure()
 plt.show
 
+
 # %% Svar på del c:
 
 min_varighet = np.argmin(varighet)     # minste samtaletid finnes
 max_varighet = np.argmax(varighet)
 min_var = varighet[min_varighet]       # minste samtaletid hentes med index
 max_var = varighet[max_varighet]
-print("(del c) Minste samtaletid (format: timer:minutter:sekunder):", min_var)
-print("(del c) Lengste samtaletid:", max_var)  # leses til skjerm som "string" type
+print(" del c)    Minste samtaletid (timer:minutter:sekunder)", min_var)
+print(" del c)    Lengste samtaletid er", max_var) # leses til skjerm som "string" type
+
 
 # %% Svar på del d:
 
@@ -59,19 +63,20 @@ while i < tot_henv:
     varighet_sekunder.append(time(varighet[i]))  
     i = i + 1
 
-def Average(l):      # utregning av gjennomsnitt samtaletid i sekunder
+def mean(l):      # utregning av gjennomsnitt samtaletid i sekunder
     avg = sum(l) / len(l) 
     return avg
 
-average = Average(varighet_sekunder)
+average = mean(varighet_sekunder)
 average_round = round(average)
 
 average_min_sek = str( # gjør om fra integer sekunder til string minutter og sekunder
     datetime.timedelta(
         seconds=average_round)) # bruker modulen "datetime" til tids-manipulering 
-   
-print("(del d) Gjennomsnittlig samtaletid er:",
-      average_min_sek)     # gjennomsnittstid skrives til skjerm
+  
+print(" del d)    Gjennomsnittlig samtaletid er",
+      average_min_sek)     # gjennomsnittstid skrives til skjerm 
+
 
 # %% Svar på del e:
 
@@ -114,6 +119,7 @@ plt.xlabel("Svar paa oppgave del e)")
 plt.legend(antall, loc="best")
 plt.show()
 
+
 # %% Svar på del f:
 
 negativ = 0     # antall negative stemmer fra kunder
@@ -130,6 +136,20 @@ for i in range (len(score)):     # loop som teller antall stemmer utefra score
 
 tot = negativ + positiv + noytral     # totale antall stemmer lagres i variabelen "tot"
 
-NPS = (positiv/tot - negativ/tot) * 100     # NPS regnes ut 
-print("(del f) Supportavdelingens NPS er:"
-      ,round(NPS))      # NPS resultatet avrundes og skrives til skjerm
+nps = (positiv/tot - negativ/tot) *100  # NPS regnes ut 
+
+nps_round = [round(nps)]     # lager liste av avrundet nps verdi
+
+for i in range(len(nps_round)):     # funskjon for kommentar til NPS score  
+    if nps_round[i] <= 0:           # NPS score og kommentar skrives til skjerm
+        print(" del f)    Supportavdelingens NPS er avrundet til",
+              nps_round,"og det kan bli bedre")
+    elif nps_round[i] > 0 and nps_round[i] <= 50:
+        print(" del f)    Supportavdelingens NPS er avrundet til",
+              nps_round,"og det er bra!")
+    elif nps_round[i] > 50 and nps_round[i] <= 70:
+        print(" del f)    Supportavdelingens NPS er avrundet til",
+              nps_round,"og det er veldig bra")
+    elif nps_round[i] > 70:
+        print(" del f)    Supportavdelingens NPS er avrundet til",
+              nps_round,"og det er høyeste score")
