@@ -19,7 +19,7 @@ score = data["Tilfredshet"].values
 
 # %% Svar på del b:
     
-ant_man = np.count_nonzero(u_dag == "Mandag") # telling av antall henvendelser for mandag 
+ant_man = np.count_nonzero(u_dag == "Mandag")# telling av antall henvendelser for mandag 
 ant_tir = np.count_nonzero(u_dag == "Tirsdag") 
 ant_ons = np.count_nonzero(u_dag == "Onsdag")
 ant_tor = np.count_nonzero(u_dag == "Torsdag")
@@ -136,20 +136,21 @@ for i in range (len(score)):     # loop som teller antall stemmer utefra score
 
 tot = negativ + positiv + noytral     # totale antall stemmer lagres i variabelen "tot"
 
-nps = (positiv/tot - negativ/tot) *100  # NPS regnes ut 
+nps = (positiv/tot - negativ/tot) *100     # NPS regnes ut 
 
 nps_round = [round(nps)]     # lager liste av avrundet nps verdi
 
-for i in range(len(nps_round)):     # funskjon for kommentar til NPS score  
+for i in range(len(nps_round)):     # loop for kommentar til NPS score  
     if nps_round[i] <= 0:           # NPS score og kommentar skrives til skjerm
-        print(" del f)    Supportavdelingens NPS er avrundet til",
-              nps_round,"og det kan bli bedre")
+        print(" del f)    Dette var ikke så bra. MORSE supportavdeling har fått en NPS på",
+              nps_round[0])
     elif nps_round[i] > 0 and nps_round[i] <= 50:
-        print(" del f)    Supportavdelingens NPS er avrundet til",
-              nps_round,"og det er bra!")
+        print(" del f)    Dette var bra! MORSE supportavdeling har fått en NPS på",
+              nps_round[0])
     elif nps_round[i] > 50 and nps_round[i] <= 70:
-        print(" del f)    Supportavdelingens NPS er avrundet til",
-              nps_round,"og det er veldig bra")
-    elif nps_round[i] > 70:
-        print(" del f)    Supportavdelingens NPS er avrundet til",
-              nps_round,"og det er høyeste score")
+        print(" del f)    Dette var veldig bra. MORSE supportavdeling har fått en NPS på",
+              nps_round[0])
+    elif nps_round[i] > 70: # henter tall med indeks [0] for å fjerne firkantklammer i utskrift
+        print(" del f)    Dette er høyeste score. MORSE supportavdeling har fått en NPS på",
+              nps_round[0])
+
