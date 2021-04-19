@@ -1,3 +1,4 @@
+
 # %% Import av pakker:
     
 import matplotlib.pyplot as plt
@@ -145,12 +146,12 @@ for i in range(len(nps_round)):     # loop for kommentar til NPS score
         print(" del f)    Dette var ikke så bra. MORSE supportavdeling har fått en NPS på",
               nps_round[0])
     elif nps_round[i] > 0 and nps_round[i] <= 50:
-        print(" del f)    Dette var bra! MORSE supportavdeling har fått en NPS på",
+        print(" del f)    Dette var bra  \N{grinning face}  MORSE supportavdeling har fått en NPS på",
               nps_round[0])
     elif nps_round[i] > 50 and nps_round[i] <= 70:
         print(" del f)    Dette var veldig bra. MORSE supportavdeling har fått en NPS på",
               nps_round[0])
-    elif nps_round[i] > 70: # henter tall med indeks [0] for å fjerne firkantklammer i utskrift
+    elif nps_round[i] > 70: # skriver ut tallet med indeks [0] for å skjule firkantklammer i utskrift
         print(" del f)    Dette er høyeste score. MORSE supportavdeling har fått en NPS på",
               nps_round[0])
 
